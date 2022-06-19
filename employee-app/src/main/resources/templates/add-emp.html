@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+form {
+	display: table;
+}
+
+p {
+	display: table-row;
+}
+
+label {
+	display: table-cell;
+}
+
+input {
+	display: table-cell;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+</head>
+
+<body style="background-color: MistyRose;">
+	<div class="container">
+		<h1>Employee Management System</h1>
+		<hr>
+		<h2>
+			<span style="color: red;" th:if="${msg}" th:text="${msg}"></span>
+		</h2>
+
+		<form action="#" th:action="@{/web/create/employee}"
+			th:object="${employee}" method="post">
+			<p>
+				<label for="employeeNo">Employee Number</label> <input type="text"
+					th:field="*{employeeNo}" id="employeeNo"
+					placeholder="Employee Number"> <br /> <span
+					style="color: red;" th:if="${#fields.hasErrors('employeeNo')}"
+					th:errors="*{employeeNo}"></span> <br />
+			</p>
+			<p>
+				<label for="employeeName">Employee Name</label> <input type="text"
+					th:field="*{employeeName}" id="employeeName"
+					placeholder="Employee Name"> <br /> <span
+					style="color: red;" th:if="${#fields.hasErrors('employeeName')}"
+					th:errors="*{employeeName}"></span> <br />
+			</p>
+			<p>
+				<label for="doj">DOJ</label> <input type="text" th:field="*{doj}"
+					id="doj" placeholder="dd/MM/yyyy"> <br /> <span
+					style="color: red;" th:if="${#fields.hasErrors('doj')}"
+					th:errors="*{doj}"></span> <br />
+			</p>
+			<p>
+				<label for="departmentCode">Department Code</label> <select
+					class="form-control" th:field="*{departmentCode}"
+					id="departmentCode">
+					<option value="0">select</option>
+					<option th:each="department : ${department}"
+						th:value="${department}" th:text="${department}"></option>
+				</select> <br /> <span style="color: red;"
+					th:if="${#fields.hasErrors('departmentCode')}"
+					th:errors="*{departmentCode}"></span> <br />
+			</p>
+			<p>
+				<label for="salary">Salary</label> <input type="text"
+					th:field="*{salary}" id="salary" placeholder="Salary"> <br />
+				<span style="color: red;" th:if="${#fields.hasErrors('salary')}"
+					th:errors="*{salary}"></span> <br />
+			</p>
+			<input type="submit" value="SAVE"> <input type="reset"
+				value="CLEAR">
+		</form>
+		<hr>
+		<a th:href="@{/web/index}">Home</a>
+	</div>
+</body>
+
+</html>
